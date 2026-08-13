@@ -1,11 +1,41 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Link } from "react-router-dom";
 import type { GalleryProps } from "../../types/photo";
+import { useRef } from "react";
 
 const GalleryCard = ({ item, category, onDownload }: GalleryProps) => {
   const isPhoto = category === "photos";
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  // Guard against mismatched item/category during transient state updates
+  const hasPhotoData = isPhoto && !!item?.src?.large;
+  const hasVideoData = !isPhoto && !!item?.video_files[0]?.link;
+
+  const handleMouseEnter = () => {
+    // console.log("Enter hover");
+    if (!isPhoto && videoRef.current) {
+      videoRef.current.play();
+    }
+  };
+
+  const handleMouseLeave = () => {
+    // console.log("Leave hover");
+    if (!isPhoto && videoRef.current) {
+      videoRef.current.pause();
+      videoRef.current.currentTime = 0;
+    }
+  };
+
+  if (!hasPhotoData && !hasVideoData) {
+    return null;
+  }
+
   return (
-    <article className="relative h-full overflow-hidden rounded-base">
+    <article
+      className="relative h-full overflow-hidden rounded-base"
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+    >
       <Link
         // to={`${item.src.large2x}`}
         to={isPhoto ? item.src.large2x : item.video_files[0].link}
@@ -24,9 +54,13 @@ const GalleryCard = ({ item, category, onDownload }: GalleryProps) => {
             />
           ) : (
             <video
-              controls
+              // controls
+              ref={videoRef}
               muted
-              className="w-full rounded-base object-cover object-center"
+              playsInline
+              loop
+              preload="metadata"
+              className="w-full h-full rounded-base object-cover object-center"
             >
               <source src={item.video_files[0].link} type="video/mp4" />
               Your browser does not support the video tag.

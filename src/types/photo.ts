@@ -1,6 +1,8 @@
 import type { SetStateAction, Dispatch } from "react";
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
+
+// Gallery Hooks Return Interface
 export interface UseGalleryHooksReturn {
   photoColumns?: Photo[][];
   visible?: number;
@@ -13,6 +15,8 @@ export interface UseGalleryHooksReturn {
   searchGallery: (keyword: string, type: "photos" | "videos") => Promise<void>;
   IsCategory: "photos" | "videos";
   setIsCategory: any;
+  loading: boolean;
+  error: string | null;
 }
 
 // export interface Photo {
@@ -31,6 +35,7 @@ export interface UseGalleryHooksReturn {
 //   };
 // }
 
+// Photo Interface
 export interface Photo {
   id: number;
   width: number;
@@ -68,6 +73,7 @@ export interface Photo {
 //   };
 // }
 
+// Video Interface
 export interface Video {
   id: number;
 
@@ -95,6 +101,7 @@ export interface Video {
 //   onDownload: (url: string, filename: string) => void;
 // }
 
+// Gallery Props Interface
 export type GalleryProps =
   | {
       category: "photos";
@@ -107,6 +114,7 @@ export type GalleryProps =
       onDownload: (url: string, filename: string) => void;
     };
 
+// Category Interface
 export type Category = {
   keyword: string;
   image: string;

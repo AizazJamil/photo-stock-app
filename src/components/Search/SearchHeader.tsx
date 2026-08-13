@@ -1,18 +1,10 @@
 // import { useState } from "react";
 // import useSearchHooks from "../../hooks/useSearchHooks";
+import type { SearchHeaderProps } from "../../types/SearchInterface";
 import Icon from "../Icons/Icon";
 import SearchCategoriesField from "../Input/SearchCategoriesField";
 import SearchControl from "../Input/SearchControl";
 import { useNavigate } from "react-router-dom";
-
-interface SearchHeaderProps {
-  search: string;
-  setSearch: (value: string) => void;
-  handleSearch: (e: React.FormEvent) => void;
-  category?: "photos" | "videos";
-  // setCategory: (value: "photos" | "videos") => void;
-  query?: string;
-}
 
 const SearchHeader = ({
   search,
@@ -66,7 +58,9 @@ const SearchHeader = ({
           <span className="sr-only">Icon description</span>
         </button>
       </form>
-      <h1 className="text-white text-4xl capitalize">Free {query} Photos</h1>
+      <h1 className="text-white text-4xl capitalize">
+        Free {query} {category === "photos" ? "Photos" : "Videos"}
+      </h1>
     </>
   );
 };

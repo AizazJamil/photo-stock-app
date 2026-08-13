@@ -49,18 +49,24 @@ const Search = () => {
   // Convert search photos into 4 columns (same as Gallery page)
   const photoColumns = useMemo(() => {
     const columns = 4;
-    const cols = Array.from({ length: columns }, () => []);
+    const cols: any[][] = Array.from({ length: columns }, () => []);
 
-    photos.forEach((photo, index) => {
-      cols[index % columns].push(photo);
+    const items = category === "photos" ? photos : videos;
+
+    items.forEach((item, index) => {
+      cols[index % columns].push(item);
     });
 
-    videos.forEach((video, index) => {
-      cols[index % columns].push(video);
-    });
+    // photos.forEach((photo, index) => {
+    //   cols[index % columns].push(photo);
+    // });
+
+    // videos.forEach((video, index) => {
+    //   cols[index % columns].push(video);
+    // });
 
     return cols;
-  }, [photos, videos]);
+  }, [photos, videos, category]);
 
   return (
     <div className="py-35 pb-10">

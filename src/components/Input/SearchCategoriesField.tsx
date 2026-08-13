@@ -1,5 +1,6 @@
 import "flowbite";
-import { useState } from "react";
+import { initDropdowns } from "flowbite";
+import { useEffect } from "react";
 
 interface Option {
   label: string;
@@ -20,7 +21,7 @@ const SearchCategoriesField = ({
   category,
   setCategory,
 }: SearchCategoriesFieldProps) => {
-  const [, /*isOpen*/ setIsOpen] = useState(false);
+  // const [, /*isOpen*/ setIsOpen] = useState(false);
 
   const options: Option[] = [
     { label: "Photos", value: "photos" },
@@ -31,8 +32,12 @@ const SearchCategoriesField = ({
 
   const handleSelect = (value: "photos" | "videos") => {
     setCategory(value);
-    setIsOpen(false);
+    // setIsOpen(false);
   };
+
+  useEffect(() => {
+    initDropdowns();
+  }, []);
 
   return (
     <>
@@ -40,7 +45,7 @@ const SearchCategoriesField = ({
         id="dropdown-button"
         data-dropdown-toggle="dropdown"
         type="button"
-        onClick={() => setIsOpen((prev) => !prev)}
+        // onClick={() => setIsOpen((prev) => !prev)}
         className="inline-flex items-center shrink-0 z-11 text-body-subtle bg-transparent box-border border border-olive-700 border-r-0 font-medium leading-5 rounded-s-base text-sm px-4 py-2.5 focus:outline-none cursor-pointer"
       >
         <svg
@@ -92,6 +97,7 @@ const SearchCategoriesField = ({
           {options.map((option) => (
             <li key={option.value}>
               <button
+                type="button"
                 //   className="block p-2 hover:bg-neutral-tertiary-medium hover:text-heading rounded-md relative z-11"
                 className={`w-full text-left p-2 rounded-md hover:bg-neutral-tertiary-medium cursor-pointer ${
                   category === option.value

@@ -2,7 +2,15 @@
 import { Link } from "react-router-dom";
 import { useGalleryHooks } from "../../pages";
 
-const CategoriesAvatar = ({ categories, formatCategory }) => {
+interface CategoriesAvatarProps {
+  categories: any[];
+  formatCategory: (keyword: string) => string;
+}
+
+const CategoriesAvatar = ({
+  categories,
+  formatCategory,
+}: CategoriesAvatarProps) => {
   const { IsCategory } = useGalleryHooks();
   return (
     <div className="flex items-center justify-start gap-3 flex-wrap overflow-x-auto">
