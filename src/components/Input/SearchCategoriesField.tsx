@@ -13,7 +13,7 @@ interface Option {
 // }
 
 interface SearchCategoriesFieldProps {
-  category: "photos" | "videos";
+  category?: "photos" | "videos";
   setCategory: (value: "photos" | "videos") => void;
 }
 

@@ -1,4 +1,14 @@
-const SearchControl = ({ search, setSearch, placeholder }) => {
+interface SearchControlProps {
+  search: string;
+  setSearch: React.Dispatch<React.SetStateAction<string>>;
+  placeholder?: string;
+}
+
+const SearchControl = ({
+  search,
+  setSearch,
+  placeholder,
+}: SearchControlProps) => {
   return (
     <input
       type="text"

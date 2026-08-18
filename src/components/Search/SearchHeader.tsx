@@ -1,16 +1,17 @@
-// import { useState } from "react";
+// import type { Dispatch, FormEvent, SetStateAction } from "react";
+import { useNavigate } from "react-router-dom";
+
 // import useSearchHooks from "../../hooks/useSearchHooks";
 import type { SearchHeaderProps } from "../../types/SearchInterface";
 import Icon from "../Icons/Icon";
 import SearchCategoriesField from "../Input/SearchCategoriesField";
 import SearchControl from "../Input/SearchControl";
-import { useNavigate } from "react-router-dom";
 
 const SearchHeader = ({
   search,
   setSearch,
   handleSearch,
-  category,
+  category = "photos",
   query,
 }: SearchHeaderProps) => {
   // const { query } = useSearchHooks();

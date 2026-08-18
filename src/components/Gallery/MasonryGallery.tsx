@@ -27,7 +27,7 @@ const MasonryGallery = ({
     setVisible((prev) => prev + loadStep);
   }, [setVisible, loadStep]);
 
-  const hasMore = visible < photos.length;
+  const hasMore = (visible ?? 0) < photos.length;
 
   const renderContent = () => {
     // 1. First-load loading state
@@ -58,7 +58,7 @@ const MasonryGallery = ({
             : {}),
         }}
       >
-        {photoColumns.map((column: Photo[], columnIndex: number) => (
+        {(photoColumns ?? []).map((column: Photo[], columnIndex: number) => (
           <div key={`column-${columnIndex}`} className={`grid ${gap}`}>
             {column.map((item) => (
               <GalleryCard
